@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MB.Data.Type_of_apartment>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Type of apartments List</h2>
+        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+            {
+                <div class="col-6 text-right">
+                    <a asp-controller="Type_of_apartment" asp-action="Create" class="btn btn-primary">Create new Type of apartment</a>
+                </div>
+            }
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Name of type of apartment
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var type_of_apartment in Model)
+                {
+                <tr>
+                    <td width="70%">@type_of_apartment.Name</td>
+                    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                    {
+                        <td width="30%">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-controller="Type_of_apartment" asp-action="Update" asp-route-Id="@type_of_apartment.Id" class="btn btn-primary mx-1">Update</a>
+                                <a asp-controller="Type_of_apartment" asp-action="Delete" asp-route-Id="@type_of_apartment.Id" class="btn btn-danger mx-1">Delete</a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>
+

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MB.Data.Paid_services>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Paid services List</h2>
+        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+            {
+                <div class="col-6 text-right">
+                    <a asp-controller="Paid_services" asp-action="Create" class="btn btn-primary">Create new Paid service</a>
+                </div>
+            }
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Paid service
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var paid_service in Model)
+                {
+                <tr>
+                    <td width="70%">@paid_service.Name_of_paid_service</td>
+                    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                    {
+                        <td width="30%">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-controller="Paid_services" asp-action="Update" asp-route-Id="@paid_service.Id" class="btn btn-primary mx-1">Update</a>
+                                <a asp-controller="Paid_services" asp-action="Delete" asp-route-Id="@paid_service.Id" class="btn btn-danger mx-1">Delete</a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>
+

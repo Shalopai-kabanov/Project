@@ -1,0 +1,54 @@
+﻿@model MB.ViewModels.EmployeeVM
+
+<form method="post" asp-action="Update">
+    <input asp-for="Employee.Id" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Update Employee</h2>
+        </div>
+        <div class="form-group row">
+            <div class="col-6">
+                <label asp-for="Employee.Name"></label>
+                <input asp-for="Employee.Name" class="form-control" />
+                <span asp-validation-for="Employee.Name" class="text-danger"></span>
+            </div>
+            <div class="col-6">
+                <label asp-for="Employee.Surname"></label>
+                <input asp-for="Employee.Surname" class="form-control" />
+                <span asp-validation-for="Employee.Surname" class="text-danger"></span>
+            </div>
+            <div class="col-4">
+                <label asp-for="Employee.Hotel"></label>
+                <select asp-for="Employee.Hotel_id" asp-items="@Model.TDDHotel" class="form-control">
+                    <option selected>--Select Apartment Type--</option>
+                </select>
+                <span asp-validation-for="Employee.Hotel_id" class="text-danger"></span>
+            </div>
+            <div class="col-4">
+                <label asp-for="Employee.Role"></label>
+                <select asp-for="Employee.Role_id" asp-items="@Model.TDDRole" class="form-control">
+                    <option selected>--Select Apartment Type--</option>
+                </select>
+                <span asp-validation-for="Employee.Role_id" class="text-danger"></span>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <input type="submit" class="btn btn-info w-75" value="Update" />
+                    </div>
+                    <div class="col">
+                        <a asp-action="Index" class="btn btn-danger w-75">Back</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

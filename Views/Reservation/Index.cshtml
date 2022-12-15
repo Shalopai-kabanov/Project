@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MB.Data.Reservation>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Reservation List</h2>
+        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+            {
+                <div class="col-6 text-right">
+                    <a asp-controller="Reservation" asp-action="Create" class="btn btn-primary">Create new Reservation</a>
+                </div>
+            }
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Cost
+                    </th>
+                    <th>
+                        Date of the reservation
+                    </th>
+                    <th>
+                        Date of the end of the reservation
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model)
+                {
+                <tr>
+                    <td width="25%">@reservation.Cost</td>
+                    <td width="25%">@reservation.Date_of_reservation</td>
+                    <td width="25%">@reservation.Date_of_end_reservation</td>
+                    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                    {
+
+                        <td width="25%">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-controller="Reservation" asp-action="Update" asp-route-Id="@reservation.Id" class="btn btn-primary mx-1">Update</a>
+                                <a asp-controller="Reservation" asp-action="Delete" asp-route-Id="@reservation.Id" class="btn btn-danger mx-1">Delete</a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>
+

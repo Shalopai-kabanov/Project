@@ -1,0 +1,74 @@
+﻿@model MB.ViewModels.ApartmentVM
+
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Add Apartment</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Apartment.Room_number"></label>
+                        <input asp-for="Apartment.Room_number" class="form-control" />
+                        <span asp-validation-for="Apartment.Room_number" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Apartment.Price"></label>
+                        <input asp-for="Apartment.Price" class="form-control" />
+                        <span asp-validation-for="Apartment.Price" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Apartment.Amount_of_room"></label>
+                        <input asp-for="Apartment.Amount_of_room" class="form-control" />
+                        <span asp-validation-for="Apartment.Amount_of_room" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Apartment.Floor_number"></label>
+                        <input asp-for="Apartment.Floor_number" class="form-control" />
+                        <span asp-validation-for="Apartment.Floor_number" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Apartment.Size"></label>
+                        <input asp-for="Apartment.Size" class="form-control" />
+                        <span asp-validation-for="Apartment.Size" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Apartment.Type_of_apartment"></label>
+                        <select asp-for="Apartment.Type_of_apartment_id" asp-items="@Model.TDDType_of_apartment" class="form-control">
+                            <option selected>--Select Apartment Type--</option>
+                        </select>
+                        <span asp-validation-for="Apartment.Type_of_apartment_id" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Apartment.Hotel"></label>
+                        <select asp-for="Apartment.Hotel_id" asp-items="@Model.TDDHotel" class="form-control">
+                            <option selected>--Select Hotel--</option>
+                        </select>
+                        <span asp-validation-for="Apartment.Hotel_id" class="text-danger"></span>
+                    </div>
+                </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-75" value="create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-danger w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MB.Data.Resident>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Resident List</h2>
+        </div>
+        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+        {
+            <div class="col-6 text-right">
+                <a asp-controller="Resident" asp-action="Create" class="btn btn-primary">Create new Resident</a>
+            </div>
+        }
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <div class=" container overflow-hidden">
+            <div class="row">
+                @foreach (var obj in Model)
+                {<div class="col-6">
+
+                        <div class="card p-3  my-2 border bg-light">
+                            <h4>@obj.Name</h4>
+                            <h4>@obj.Surname</h4>
+                            <div>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-3">
+                                            <div class="row">
+                                                <aside class="col-sm-6 col-md-12 p-4">
+                                                    <img src="~/images/emplty.jpg" class="img-thumbnail" alt="...">
+                                                </aside>
+                                            </div>
+                                        </div>
+                                        <main>
+                                            Пол: @obj.Sex<br /><br />
+                                            Номер телефона: @obj.Phone_number<br /><br />
+                                            Серия пасспорта:@obj.Seria<br /><br />
+                                            Номер пасспорта:@obj.Number<br /><br />
+                                        </main>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="w-100 btn-group" role="group">
+                                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                                {
+                                    <a asp-controller="Resident" asp-action="Update" asp-route-Id="@obj.Id" class="btn btn-primary mx-1 ">Update</a>
+                                }
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <a asp-controller="Resident" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-1">Delete</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>
+
+

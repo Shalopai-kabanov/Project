@@ -1,0 +1,36 @@
+﻿@model MB.Data.Apartment
+
+@{ ViewData["Title"] = "Details"; }
+
+
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-md-5 col-lg-3">
+                <div class="row">
+                    <aside class="col-sm-6 col-md-12 p-4">
+                        <img src="~/images/anotheraps.jpg" class="img-thumbnail" alt="...">
+                    </aside>
+                </div>
+            </div>
+            <main class="col-md-7 col-lg-9 p-4">
+                <h4 class="text-left">
+                    Общие сведения о комнате
+                </h4>
+
+                Цена: @Html.DisplayFor(model => model.Price)<br /><br />
+                Отель: @Html.DisplayFor(model => model.Hotel.Hotel_name)<br /><br />
+                Тип комнаты: @Html.DisplayFor(model => model.Type_of_apartment.Name)<br /><br />
+                Размер: @Html.DisplayFor(model => model.Size)<br /><br />
+                Количество комнат: @Html.DisplayFor(model => model.Amount_of_room)<br /><br />
+            </main>
+        </div>
+    </section>
+</div>
+<div class="mx-auto" style="width: 300px">
+    <a class="btn btn-outline-info" asp-action="Index">Вернуться</a>
+    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+        {
+            <a class="btn btn-outline-info" asp-action="Update" asp-route-id="@Model.Id">Изменить</a>
+        }
+</div>
